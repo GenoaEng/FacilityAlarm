@@ -279,6 +279,8 @@ async def async_setup(hass: HomeAssistant, _: dict) -> bool:
             # Sync all entries
             synced_count = 0
             for stored_entry_id, entry_data in hass.data[DOMAIN].items():
+                if not isinstance(entry_data, dict):
+                    continue
                 if "sensor" in entry_data and entry_data["sensor"]:
                     try:
                         await entry_data["sensor"].async_force_name_sync()
@@ -341,8 +343,9 @@ async def async_setup(hass: HomeAssistant, _: dict) -> bool:
             
             version = await hass.async_add_executor_job(read_manifest)
             
-            # Re-register resource with new version
+            # Re-register resources with new version
             await init_resource(hass, "/local/alarm-config-card/alarm-config-card.js", version)
+            await init_resource(hass, "/local/alarm-config-card/alarm-responsible-card.js", version)
             
             _LOGGER.info(f"Alarm Config Card: Resources updated to version {version}")
             

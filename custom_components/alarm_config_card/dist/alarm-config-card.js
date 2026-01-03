@@ -546,8 +546,6 @@ class AlarmConfigCardEditor extends HTMLElement {
     }
     if (domain === "sensor") {
       return [
-        { value: "above", label: "Above threshold" },
-        { value: "below", label: "Below threshold" },
         { value: "changed", label: "Value changed" },
       ];
     }

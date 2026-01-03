@@ -21,7 +21,6 @@ ALLOWED_CONFIG_KEYS = {
     "config_id",
     "target_entity",
     "trigger_types",
-    "trigger_threshold",
     "door_open_seconds",
     "alarm_enabled",
     "sound_enabled",
@@ -35,6 +34,8 @@ ALLOWED_CONFIG_KEYS = {
     "auto_clear_enabled",
     "auto_clear_seconds",
     "title",
+    "tag_type",
+    "tag_custom",
 }
 
 OPEN_STATES = {"on", "open", "opening"}
@@ -193,12 +194,6 @@ class AlarmConfigManager:
 
         if trigger == "changed":
             return state_changed
-        if trigger in ("above", "below"):
-            threshold = self._parse_float(config.get("trigger_threshold"))
-            value = self._parse_float(new_state.state)
-            if threshold is None or value is None:
-                return False
-            return value > threshold if trigger == "above" else value < threshold
         if trigger in ("on", "off"):
             return state == trigger
         if trigger in ("motion", "cctv_motion"):
