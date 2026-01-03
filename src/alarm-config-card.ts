@@ -71,6 +71,7 @@ class AlarmConfigCard extends HTMLElement {
     }
 
     const missingEntity = !stateObj;
+    const entityId = this._config?.entity ?? "";
     const entityOptions = this._getEntityOptions();
     const entitySelectOptions = entityOptions.length
       ? entityOptions
@@ -195,7 +196,7 @@ class AlarmConfigCard extends HTMLElement {
           <button id="save">Save</button>
           <button id="clear" class="secondary">Clear</button>
         </div>
-        ${missingEntity ? `<div class="warning">Entity ${this._config.entity} not found.</div>` : ""}
+        ${missingEntity ? `<div class="warning">Entity ${this._escapeHtml(entityId)} not found.</div>` : ""}
         ${this._statusMessage ? `<div class="status">${this._escapeHtml(this._statusMessage)}</div>` : ""}
       </ha-card>
     `;
