@@ -10,5 +10,5 @@
   "issue_tracker": "https://github.com/GenoaEng/FacilityAlarm/issues",
   "loggers": ["custom_components.alarm_config_card"],
   "requirements": [],
-  "version": "1.5.0"
+  "version": "1.5.2"
 }
